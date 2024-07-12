@@ -42,7 +42,9 @@
   <h3>Enlace de atributos:</h3>
   <p>Esto se usa cuando necesitamos manipular atributos de nuestro HTML de forma condicional</p>
 
-  <button type="button" [disabled]="!isLogged">Comprar producto</button>
+  <button type="button" [hidden]="!isLogged">Comprar producto</button>
+
+  
 
  </section>
 
@@ -92,7 +94,69 @@
    <p>Los productos en Stock son:</p>
 
    <ol>
-    <li *ngFor="let producto of productos">{{producto}}</li>
+    <li class="caja" *ngFor="let producto of productos">{{producto}}</li>
    </ol>
 
  </section>
+
+ <hr>
+
+ <!--  FORMULARIOS -->
+<!-- ES LA FORMA DE PEDIRLE INFORMACIÓN AL USUARIO -->
+
+<section>
+  <h3>FORMULARIOS EN ANGULAR</h3>
+  <p>Hay dos tipos: Formularios basados en una plantilla y Formularios reactivos</p>
+
+  <h4>FORMULARIOS DRIVEN-TEMPLATES</h4>
+  <!-- importar FormModule -->
+
+  <div>
+    <form (ngSubmit)="manejarEnvio()">
+      <label>
+        Color Favorito
+        <input type="text" name="colorFav" [(ngModel)]="colorFavorito">
+      </label>
+
+      <br>
+      <br>
+
+      <label>
+        Nombre
+        <input type="text" name="nombre" [(ngModel)]="nombre">
+      </label>
+
+      <br>
+      <br>
+
+      <button type="submit">Enviar información</button>
+    </form>
+  </div>
+
+
+  <!-- FORMULARIOS REACTIVOS -->
+   <h3>FORMULARIOS REACTIVOS</h3>
+
+  <div>
+    <form [formGroup]="login" (ngSubmit)="manejarSubmit()">
+      <label>
+        Correo
+        <input type="email" name="email" formControlName="correo">
+      </label>
+
+      <br>
+      <br>
+
+      <label>
+        Contraseña
+        <input type="password" name="password" formControlName = "contrasenia">
+      </label>
+
+      <br>
+      <br>
+
+      <button type="submit">Enviar información 2</button>
+    </form>
+  </div>
+
+</section>

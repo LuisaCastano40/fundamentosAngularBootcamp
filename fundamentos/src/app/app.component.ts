@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+// Formularios driven-Templates
+import { FormsModule } from '@angular/forms';
+// Grupos y controles para formularios reactivos
+// Formularios reactivos
+import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -33,12 +38,19 @@ export class AppComponent {
 
   colorFondo: string = 'colorPink';
   // Forma correcta de manejar las variable de tipo booleano
-  isLogged : boolean = false;
+  isLogged : boolean = true;
   isDelete : boolean = true;
   isShowed : boolean = true;
 
+  datosDB: string[] = ['se reciben todos los datos de la base de datos']
+  productos : string[] = ['carros', 'bicicletas', 'avion']
+  // ---------------------------------------------
+  // FORMULARIOS ---------------------------------
 
-  productos : string[] = ['carros', 'motos', 'bicicletas']
+  colorFavorito: string = '';
+  nombre: string = '';
+
+  
   // -------------------------------
 
   // 2. Funciones o métodos
@@ -60,6 +72,28 @@ export class AppComponent {
   manejarClick(){
     console.log('evento click');
     this.colorFondo = 'colorPink'
+  }
+
+  // ---------------------------------------------------
+  // FORMULARIOS ---------------------------------------
+
+  manejarEnvio(){
+    alert('los datos del formulario son: ' + this.colorFavorito + '-' + this.nombre);
+  }
+
+  // formularios reactivos
+  // 1. crear mi grupo -> depende de lo que haga el formulario
+  // 2. crear los controles -> de los inputs que usted quiera almacenar
+
+  login = new FormGroup({
+    correo : new FormControl(''),
+    contrasenia: new FormControl('')
+  })
+
+  manejarSubmit(){
+    console.log('Estos son los datos de mi formulario: ', this.login.value);
+
+    console.log('El correo electrónico es: ', this.login.get('correo')?.value)
   }
 
   //3. Exportaciones - ciclo de vida
